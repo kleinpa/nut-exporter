@@ -47,7 +47,7 @@ class CallbackCollectable : public prometheus::Collectable {
   std::function<std::vector<prometheus::MetricFamily>()> fn_;
 };
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   absl::ParseCommandLine(argc, argv);
 
   std::cout << "starting";
@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
         results.push_back(
             makeGauge("battery_charge_ratio",
                       std::stod(value_map.at("battery.charge")[0]) / 100));
-      } catch (std::invalid_argument) {
+      } catch (std::invalid_argument &) {
       }
     }
 
@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
         results.push_back(
             makeGauge("battery_runtime_seconds",
                       std::stod(value_map.at("battery.runtime")[0])));
-      } catch (std::invalid_argument) {
+      } catch (std::invalid_argument &) {
       }
     }
 
@@ -90,7 +90,7 @@ int main(int argc, char** argv) {
       try {
         results.push_back(makeGauge(
             "battery_volts", std::stod(value_map.at("battery.voltage")[0])));
-      } catch (std::invalid_argument) {
+      } catch (std::invalid_argument &) {
       }
     }
 
@@ -99,7 +99,7 @@ int main(int argc, char** argv) {
       try {
         results.push_back(makeGauge(
             "input_volts", std::stod(value_map.at("input.voltage")[0])));
-      } catch (std::invalid_argument) {
+      } catch (std::invalid_argument &) {
       }
     }
 
@@ -108,7 +108,7 @@ int main(int argc, char** argv) {
       try {
         results.push_back(makeGauge(
             "output_volts", std::stod(value_map.at("output.voltage")[0])));
-      } catch (std::invalid_argument) {
+      } catch (std::invalid_argument &) {
       }
     }
 
@@ -117,7 +117,7 @@ int main(int argc, char** argv) {
       try {
         results.push_back(makeGauge(
             "load_ratio", std::stod(value_map.at("ups.load")[0]) / 100));
-      } catch (std::invalid_argument) {
+      } catch (std::invalid_argument &) {
       }
     }
 
@@ -127,7 +127,7 @@ int main(int argc, char** argv) {
         results.push_back(
             makeGauge("nominal_watts",
                       std::stod(value_map.at("ups.realpower.nominal")[0])));
-      } catch (std::invalid_argument) {
+      } catch (std::invalid_argument &) {
       }
     }
 

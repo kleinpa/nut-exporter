@@ -1,7 +1,7 @@
 genrule(
-    name="empty_config_header",
-    outs = ["libusb/config.h"],
-    cmd = "echo > $@"
+    name = "empty_config_header",
+    outs = ["empty_config/config.h"],
+    cmd = "echo > $@",
 )
 
 cc_library(
@@ -9,27 +9,23 @@ cc_library(
     hdrs = [
         ":empty_config_header",
     ],
-    strip_include_prefix = "libusb/",
+    includes = ["empty_config"],
 )
 
 cc_library(
     name = "libusb",
-    deps = [
-        ":config",
-    ],
     srcs = [
-        #        ":empty_config_header",
         "libusb/core.c",
         "libusb/descriptor.c",
         "libusb/hotplug.c",
-        "libusb/hotplug.h",
         "libusb/io.c",
         "libusb/libusbi.h",
+        "libusb/os/events_posix.c",
+        "libusb/os/events_posix.h",
         "libusb/os/linux_netlink.c",
+        "libusb/os/linux_udev.c",
         "libusb/os/linux_usbfs.c",
         "libusb/os/linux_usbfs.h",
-        "libusb/os/poll_posix.c",
-        "libusb/os/poll_posix.h",
         "libusb/os/threads_posix.c",
         "libusb/os/threads_posix.h",
         "libusb/strerror.c",
@@ -37,15 +33,15 @@ cc_library(
         "libusb/version.h",
         "libusb/version_nano.h",
     ],
-    copts = [
-        "-Iexternal/com_github_libusb_libusb/libusb",
-    ],
     hdrs = [
         "libusb/libusb.h",
     ],
-    local_defines=[
+    copts = [
+        "-Iexternal/com_github_libusb_libusb/libusb",
+    ],
+    linkopts = ["-pthread"],
+    local_defines = [
         "DEFAULT_VISIBILITY=\"__attribute__((visibility(\\\"default\\\")))\"",
-
         "ENABLE_LOGGING=1",
         "HAVE_ASM_TYPES_H=1",
         "HAVE_CLOCK_GETTIME=1",
@@ -64,27 +60,27 @@ cc_library(
         "HAVE_SYS_STAT_H=1",
         "HAVE_SYS_TIME_H=1",
         "HAVE_SYS_TYPES_H=1",
+        "HAVE_EVENTFD=1",
         "HAVE_TIMERFD=1",
         "HAVE_UNISTD_H=1",
-
         "LT_OBJDIR=\".libs/\"",
         "PACKAGE=\"libusb-1.0\"",
         "PACKAGE_BUGREPORT=\"libusb-devel@lists.sourceforge.net\"",
         "PACKAGE_NAME=\"libusb-1.0\"",
-
-        "PACKAGE_STRING=\"libusb-1.0 1.0.23\"",
+        "PACKAGE_STRING=\"libusb-1.0 ?\"",
         "PACKAGE_TARNAME=\"libusb-1.0\"",
         "PACKAGE_URL=\"http://libusb.info\"",
-
-        "PACKAGE_VERSION=\"1.0.23\"",
-        "POLL_POSIX=1",
+        "PACKAGE_VERSION=\"?\"",
+        "PLATFORM_POSIX=1",
         "STDC_HEADERS=1",
-
+        "PRINTF_FORMAT(a,b)=\"__attribute__((__format__ (__printf__, a, b)))\"",
         "THREADS_POSIX=1",
-        "VERSION=\"1.0.23\"",
+        "VERSION=\"?\"",
         "_GNU_SOURCE=1",
     ],
     strip_include_prefix = "libusb/",
     visibility = ["//visibility:public"],
-    linkopts = ["-pthread"],
+    deps = [
+        ":config",
+    ],
 )
