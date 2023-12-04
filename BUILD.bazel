@@ -1,0 +1,42 @@
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+
+cc_binary(
+    name = "nut_exporter",
+    srcs = ["main.cc"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_jupp0r_prometheus_cpp//pull",
+        "@com_github_networkupstools_nut//:nutclient",
+        "@abseil-cpp//absl/flags:flag",
+        "@abseil-cpp//absl/flags:parse",
+        "@abseil-cpp//absl/strings:str_format",
+    ],
+)
+
+pkg_tar(
+    name = "layer",
+    srcs = [
+        ":nut_exporter",
+        "@com_github_networkupstools_nut//:upsd",
+        "@com_github_networkupstools_nut//:usbhid-ups",
+    ],
+    package_dir = "/",
+)
+
+oci_image(
+    name = "image",
+    base = "@distroless_cc_base//image",
+    # entrypoint = ["/entrypoint.sh"],
+    target_compatible_with = ["@platforms//os:linux"],
+    tars = [
+        ":layer",
+    ],
+)
+
+oci_tarball(
+    name = "image_tarball",
+    image = ":image",
+    repo_tags = ["nut-exporter:bazel"],
+    target_compatible_with = ["@platforms//os:linux"],
+)

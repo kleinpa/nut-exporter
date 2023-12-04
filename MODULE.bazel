@@ -1,0 +1,6 @@
+module(name = "nut_exporter")
+
+bazel_dep(name = "abseil-cpp", version = "20230802.0")
+bazel_dep(name = "rules_cc", version = "0.0.9")
+bazel_dep(name = "rules_oci", version = "1.4.0")
+bazel_dep(name = "rules_pkg", version = "0.9.1")
