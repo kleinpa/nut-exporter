@@ -29,9 +29,9 @@ prometheus_cpp_repositories()
 
 http_archive(
     name = "com_google_absl",
-    sha256 = "d6cd07f2e2f249585a43599172a1c345024d66d72c443d435b39317168c85b20",
-    strip_prefix = "abseil-cpp-66406fdf1553de6ad672576167e7cc7ca2d764cb",
-    urls = ["https://github.com/abseil/abseil-cpp/archive/66406fdf1553de6ad672576167e7cc7ca2d764cb.zip"],
+    sha256 = "6f03495ec2fdc582b2e858e04a268caf2415c12633f7634a3b99c1698950f05f",
+    strip_prefix = "abseil-cpp-03b8d6ea3dc6a0b8c6bcf42503c2053754dab2e4",
+    urls = ["https://github.com/abseil/abseil-cpp/archive/03b8d6ea3dc6a0b8c6bcf42503c2053754dab2e4.zip"],
 )
 
 http_archive(
