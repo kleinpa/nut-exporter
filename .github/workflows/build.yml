@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Install libudev-dev
         run: sudo apt-get install -y libudev-dev
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Build and push image
         run: bazelisk build --disk_cache=/tmp/bazel-cache -c opt //:nut_exporter_image.tar
       - name: Log into registry
