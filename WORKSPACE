@@ -3,9 +3,9 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
     name = "com_github_networkupstools_nut",
     build_file = "@//external:nut.BUILD",
-    sha256 = "2f1ed256a6b3fcac27e8e1e4f47fbf14d20431504d454fb5a6cac9d257e9feee",
-    strip_prefix = "nut-e01e8912eff2c27fb30c27019ed7eba131b13aec",
-    urls = ["https://github.com/networkupstools/nut/archive/e01e8912eff2c27fb30c27019ed7eba131b13aec.tar.gz"],
+    sha256 = "7ff55e6426077f3b234afc56fecac3bf83cd56eccef85aab0163cd6298a5a15f",
+    strip_prefix = "nut-fd6f4188b791af9c5817cfa678e23f317b146df2",
+    urls = ["https://github.com/networkupstools/nut/archive/fd6f4188b791af9c5817cfa678e23f317b146df2.tar.gz"],
 )
 
 http_archive(
