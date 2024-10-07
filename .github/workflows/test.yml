@@ -1,0 +1,15 @@
+name: test
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Install libudev-dev
+        run: sudo apt install -y libudev-dev
+      - uses: actions/checkout@v4
+      - name: Run tests
+        run: bazelisk test -c opt //...
