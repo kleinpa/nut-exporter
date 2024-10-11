@@ -36,9 +36,7 @@ cc_library(
     hdrs = [
         "libusb/libusb.h",
     ],
-    copts = [
-        "-Iexternal/com_github_libusb_libusb/libusb",
-    ],
+    includes = ["libusb"],
     linkopts = ["-pthread"],
     local_defines = [
         "DEFAULT_VISIBILITY=\"__attribute__((visibility(\\\"default\\\")))\"",

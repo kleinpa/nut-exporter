@@ -10,9 +10,10 @@ cc_library(
     hdrs = [
         "clients/nutclient.h",
     ],
-    copts = [
-        "-Iexternal/com_github_networkupstools_nut/include",
-    ],
+    # copts = [
+    #     "-Iexternal/com_github_networkupstools_nut/include",
+    # ],
+    includes = ["include"],
     strip_include_prefix = "clients",
 )
 
