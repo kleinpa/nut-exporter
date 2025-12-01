@@ -11,6 +11,6 @@ jobs:
     steps:
       - name: Install libudev-dev
         run: sudo apt install -y libudev-dev
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Run tests
         run: bazelisk test -c opt //...

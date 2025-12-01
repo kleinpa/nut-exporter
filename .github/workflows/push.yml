@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Install libudev-dev
         run: sudo apt install -y libudev-dev
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Build and push image
